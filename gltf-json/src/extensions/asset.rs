@@ -13,6 +13,7 @@ pub struct Asset {
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub enum TangentSpaceConvention {
     DirectX,
+    OpenGL,
 }
 
 impl Default for TangentSpaceConvention {

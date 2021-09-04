@@ -1,16 +1,13 @@
 #[cfg(feature = "KHR_materials_pbrSpecularGlossiness")]
 use crate::material::StrengthFactor;
-#[cfg(any(
-    feature = "KHR_materials_pbrSpecularGlossiness",
-    feature = "KHR_materials_transmission"
-))]
 use crate::texture;
+use crate::validation::Validate;
 #[cfg(any(
     feature = "KHR_materials_pbrSpecularGlossiness",
     feature = "KHR_materials_transmission",
     feature = "KHR_materials_ior"
 ))]
-use crate::{validation::Validate, Extras};
+use crate::Extras;
 use gltf_derive::Validate;
 use serde_derive::{Deserialize, Serialize};
 
@@ -48,7 +45,343 @@ pub struct Material {
         skip_serializing_if = "Option::is_none"
     )]
     pub ior: Option<Ior>,
+
+    #[serde(
+        default,
+        rename = "ASOBO_material_alphamode_dither",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub alpha_mode_dither: Option<AsoboMaterialAlphaModeDither>,
+
+    #[serde(
+        default,
+        rename = "ASOBO_material_anisotropic",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub anisotropic: Option<AsoboMaterialAnisotropic>,
+
+    #[serde(
+        default,
+        rename = "ASOBO_material_blend_gbuffer",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub decal: Option<AsoboMaterialDecal>,
+
+    #[serde(
+        default,
+        rename = "ASOBO_material_clear_coat",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub clear_coat: Option<AsoboMaterialClearCoat>,
+
+    #[serde(
+        default,
+        rename = "ASOBO_material_detail_map",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub detail_map: Option<AsoboMaterialDetailMap>,
+
+    #[serde(
+        default,
+        rename = "ASOBO_material_draw_order",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub draw_order: Option<AsoboMaterialDrawOrder>,
+
+    #[serde(
+        default,
+        rename = "ASOBO_material_fake_terrain",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub fake_terrain: Option<AsoboMaterialFakeTerrain>,
+
+    #[serde(
+        default,
+        rename = "ASOBO_material_glass",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub fresnel_face: Option<AsoboMaterialFresnelFade>,
+
+    #[serde(
+        default,
+        rename = "ASOBO_material_glass",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub glass: Option<AsoboMaterialGlass>,
+
+    #[serde(
+        default,
+        rename = "ASOBO_material_invisible",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub invisible: Option<AsoboMaterialInvisible>,
+
+    #[serde(
+        default,
+        rename = "ASOBO_material_parallax_window",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub parallax_window: Option<AsoboMaterialParallaxWindow>,
+
+    #[serde(
+        default,
+        rename = "ASOBO_material_shadow_options",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub shadow_options: Option<AsoboMaterialShadowOptions>,
+
+    #[serde(
+        default,
+        rename = "ASOBO_material_UV_options",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub uv_options: Option<AsoboMaterialUVOptions>,
+
+    #[serde(
+        default,
+        rename = "ASOBO_material_SSS",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub subsurface: Option<AsoboMaterialSubsurface>,
+
+    #[serde(
+        default,
+        rename = "ASOBO_tags",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub tags: Option<AsoboTags>,
 }
+
+fn bool_true() -> bool {
+    true
+}
+
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+pub struct AsoboMaterialAlphaModeDither {
+    #[serde(default = "bool_true")]
+    enabled: bool,
+}
+
+impl Validate for AsoboMaterialAlphaModeDither {}
+
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Validate)]
+pub struct AsoboMaterialAnisotropic {
+    #[serde(
+        default,
+        rename = "wetnessAOTexture",
+        skip_serializing_if = "Option::is_none"
+    )]
+    wetness_ao_texture: Option<texture::Info>,
+}
+
+#[derive(Clone, Default, Debug, Deserialize, Serialize)]
+pub struct AsoboMaterialDecal {
+    #[serde(default = "bool_true")]
+    enabled: bool,
+    #[serde(default, rename = "baseColorBlendFactor")]
+    base_color_blend_factor: f32,
+    #[serde(default, rename = "metallicBlendFactor")]
+    metallic_blend_factor: f32,
+    #[serde(default, rename = "roughnessBlendFactor")]
+    roughness_blend_factor: f32,
+    #[serde(default, rename = "normalBlendFactor")]
+    normal_blend_factor: f32,
+    #[serde(default, rename = "emissiveBlendFactor")]
+    emissive_blend_factor: f32,
+    #[serde(default, rename = "occlusionBlendFactor")]
+    occlusion_blend_factor: f32,
+}
+
+impl Validate for AsoboMaterialDecal {}
+
+#[derive(Clone, Debug, Default, Deserialize, Serialize, Validate)]
+pub struct AsoboMaterialClearCoat {
+    #[serde(
+        default,
+        rename = "dirtTexture",
+        skip_serializing_if = "Option::is_none"
+    )]
+    dirt_texture: Option<texture::Info>,
+}
+
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+pub struct AsoboMaterialDetailMap {
+    #[serde(default, rename = "UVScale")]
+    uv_scale: f32,
+    #[serde(default, rename = "UVOffset")]
+    uv_offset: [f32; 2],
+    #[serde(default, rename = "blendThreshold")]
+    blend_threshold: f32,
+    #[serde(
+        default,
+        rename = "detailColorTexture",
+        skip_serializing_if = "Option::is_none"
+    )]
+    detail_color_texture: Option<texture::Info>,
+    #[serde(
+        default,
+        rename = "detailNormalTexture",
+        skip_serializing_if = "Option::is_none"
+    )]
+    detail_normal_texture: Option<crate::material::NormalTexture>,
+    #[serde(
+        default,
+        rename = "detailMetalRoughAOTexture",
+        skip_serializing_if = "Option::is_none"
+    )]
+    detail_metal_rough_ao_texture: Option<texture::Info>,
+    #[serde(
+        default,
+        rename = "blendMaskTexture",
+        skip_serializing_if = "Option::is_none"
+    )]
+    blend_mask_texture: Option<texture::Info>,
+}
+
+impl Validate for AsoboMaterialDetailMap {
+    fn validate<P, R>(&self, root: &crate::Root, path: P, report: &mut R)
+    where
+        P: Fn() -> crate::Path,
+        R: FnMut(&dyn Fn() -> crate::Path, crate::validation::Error),
+    {
+        self.detail_color_texture.validate(root, &path, report);
+        self.detail_normal_texture.validate(root, &path, report);
+        self.detail_metal_rough_ao_texture
+            .validate(root, &path, report);
+        self.blend_mask_texture.validate(root, &path, report);
+    }
+}
+
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+pub struct AsoboMaterialDrawOrder {
+    #[serde(default, rename = "drawOrderOffset")]
+    draw_order_offset: f32,
+}
+
+impl Validate for AsoboMaterialDrawOrder {}
+
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+pub struct AsoboMaterialFakeTerrain {
+    #[serde(default = "bool_true")]
+    enabled: bool,
+}
+
+impl Validate for AsoboMaterialFakeTerrain {}
+
+#[derive(Clone, Default, Debug, Deserialize, Serialize)]
+pub struct AsoboMaterialFresnelFade {
+    #[serde(default, rename = "fresnelFactor")]
+    fresnel_factor: f32,
+    #[serde(default, rename = "fresnelOpacityOffset")]
+    fresnel_opacity_offset: f32,
+}
+
+impl Validate for AsoboMaterialFresnelFade {}
+
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+pub struct AsoboMaterialGlass {
+    #[serde(default, rename = "glassReflectionMaskFactor")]
+    glass_reflection_mask_factor: f32,
+    #[serde(default, rename = "glassDeformationFactor")]
+    glass_deformation_factor: f32,
+}
+
+impl Validate for AsoboMaterialGlass {}
+
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+pub struct AsoboMaterialInvisible {
+    #[serde(default = "bool_true")]
+    enabled: bool,
+}
+
+impl Validate for AsoboMaterialInvisible {}
+
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+pub struct AsoboMaterialParallaxWindow {
+    #[serde(default, rename = "parallaxScale")]
+    parallax_scale: f32,
+    #[serde(default, rename = "roomSizeXScale")]
+    room_size_x_scale: f32,
+    #[serde(default, rename = "roomSizeYScale")]
+    room_size_y_scale: f32,
+    #[serde(default, rename = "roomNumberXY")]
+    room_number_xy: f32,
+    #[serde(
+        default,
+        rename = "heightMapTexture",
+        skip_serializing_if = "Option::is_none"
+    )]
+    height_map_texture: Option<texture::Info>,
+    #[serde(
+        default,
+        rename = "behindWindowMapTexture",
+        skip_serializing_if = "Option::is_none"
+    )]
+    behind_window_map_texture: Option<texture::Info>,
+}
+
+impl Validate for AsoboMaterialParallaxWindow {
+    fn validate<P, R>(&self, root: &crate::Root, path: P, report: &mut R)
+    where
+        P: Fn() -> crate::Path,
+        R: FnMut(&dyn Fn() -> crate::Path, crate::validation::Error),
+    {
+        self.height_map_texture.validate(root, &path, report);
+        self.behind_window_map_texture.validate(root, &path, report);
+    }
+}
+
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+pub struct AsoboMaterialShadowOptions {
+    #[serde(default = "bool_true", rename = "noCastShadow")]
+    no_cast_shadow: bool,
+}
+
+impl Validate for AsoboMaterialShadowOptions {}
+
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+pub struct AsoboMaterialSubsurface {
+    #[serde(default, rename = "SSSColor")]
+    sss_color: [f32; 4],
+    #[serde(
+        default,
+        rename = "opacityTexture",
+        skip_serializing_if = "Option::is_none"
+    )]
+    opacity_texture: Option<texture::Info>,
+}
+
+impl Validate for AsoboMaterialSubsurface {
+    fn validate<P, R>(&self, root: &crate::Root, path: P, report: &mut R)
+    where
+        P: Fn() -> crate::Path,
+        R: FnMut(&dyn Fn() -> crate::Path, crate::validation::Error),
+    {
+        self.opacity_texture.validate(root, path, report);
+    }
+}
+
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+pub struct AsoboMaterialUVOptions {
+    #[serde(default = "bool_true", rename = "AOUseUV2")]
+    ao_use_uv2: bool,
+    #[serde(default = "bool_true", rename = "clampUVX")]
+    clamp_uvx: bool,
+    #[serde(default = "bool_true", rename = "clampUVY")]
+    clamp_uvy: bool,
+    #[serde(default = "bool_true", rename = "clampUVZ")]
+    clamp_uvz: bool,
+}
+
+impl Validate for AsoboMaterialUVOptions {}
+
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+pub struct AsoboTags {
+    #[serde(default, rename = "Collision")]
+    collision: bool,
+}
+
+impl Validate for AsoboTags {}
 
 /// A set of parameter values that are used to define the metallic-roughness
 /// material model from Physically-Based Rendering (PBR) methodology.
