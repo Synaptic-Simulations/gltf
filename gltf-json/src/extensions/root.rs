@@ -1,8 +1,6 @@
 use gltf_derive::Validate;
 use serde_derive::{Deserialize, Serialize};
 
-use crate::validation::Validate;
-
 /// The root object of a glTF 2.0 asset.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Validate)]
 pub struct Root {
@@ -13,24 +11,6 @@ pub struct Root {
         skip_serializing_if = "Option::is_none"
     )]
     pub khr_lights_punctual: Option<KhrLightsPunctual>,
-    #[serde(
-        default,
-        rename = "ASOBO_normal_map_convention",
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub asobo_normal_map_convention: Option<AsoboNormalMapConvention>,
-}
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
-pub enum TangentSpaceConvention {
-    DirectX,
-}
-
-impl Validate for TangentSpaceConvention {}
-
-#[derive(Clone, Debug, Deserialize, Serialize, Validate)]
-pub struct AsoboNormalMapConvention {
-    pub tangent_space_convention: TangentSpaceConvention,
 }
 
 #[cfg(feature = "KHR_lights_punctual")]
