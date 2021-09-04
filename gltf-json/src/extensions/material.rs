@@ -159,7 +159,7 @@ fn bool_true() -> bool {
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct AsoboMaterialAlphaModeDither {
     #[serde(default = "bool_true")]
-    enabled: bool,
+    pub enabled: bool,
 }
 
 impl Validate for AsoboMaterialAlphaModeDither {}
@@ -171,25 +171,25 @@ pub struct AsoboMaterialAnisotropic {
         rename = "wetnessAOTexture",
         skip_serializing_if = "Option::is_none"
     )]
-    wetness_ao_texture: Option<texture::Info>,
+    pub wetness_ao_texture: Option<texture::Info>,
 }
 
 #[derive(Clone, Default, Debug, Deserialize, Serialize)]
 pub struct AsoboMaterialDecal {
     #[serde(default = "bool_true")]
-    enabled: bool,
+    pub enabled: bool,
     #[serde(default, rename = "baseColorBlendFactor")]
-    base_color_blend_factor: f32,
+    pub base_color_blend_factor: f32,
     #[serde(default, rename = "metallicBlendFactor")]
-    metallic_blend_factor: f32,
+    pub metallic_blend_factor: f32,
     #[serde(default, rename = "roughnessBlendFactor")]
-    roughness_blend_factor: f32,
+    pub roughness_blend_factor: f32,
     #[serde(default, rename = "normalBlendFactor")]
-    normal_blend_factor: f32,
+    pub normal_blend_factor: f32,
     #[serde(default, rename = "emissiveBlendFactor")]
-    emissive_blend_factor: f32,
+    pub emissive_blend_factor: f32,
     #[serde(default, rename = "occlusionBlendFactor")]
-    occlusion_blend_factor: f32,
+    pub occlusion_blend_factor: f32,
 }
 
 impl Validate for AsoboMaterialDecal {}
@@ -201,41 +201,41 @@ pub struct AsoboMaterialClearCoat {
         rename = "dirtTexture",
         skip_serializing_if = "Option::is_none"
     )]
-    dirt_texture: Option<texture::Info>,
+    pub dirt_texture: Option<texture::Info>,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct AsoboMaterialDetailMap {
     #[serde(default, rename = "UVScale")]
-    uv_scale: f32,
+    pub uv_scale: f32,
     #[serde(default, rename = "UVOffset")]
-    uv_offset: [f32; 2],
+    pub uv_offset: [f32; 2],
     #[serde(default, rename = "blendThreshold")]
-    blend_threshold: f32,
+    pub blend_threshold: f32,
     #[serde(
         default,
         rename = "detailColorTexture",
         skip_serializing_if = "Option::is_none"
     )]
-    detail_color_texture: Option<texture::Info>,
+    pub detail_color_texture: Option<texture::Info>,
     #[serde(
         default,
         rename = "detailNormalTexture",
         skip_serializing_if = "Option::is_none"
     )]
-    detail_normal_texture: Option<crate::material::NormalTexture>,
+    pub detail_normal_texture: Option<crate::material::NormalTexture>,
     #[serde(
         default,
         rename = "detailMetalRoughAOTexture",
         skip_serializing_if = "Option::is_none"
     )]
-    detail_metal_rough_ao_texture: Option<texture::Info>,
+    pub detail_metal_rough_ao_texture: Option<texture::Info>,
     #[serde(
         default,
         rename = "blendMaskTexture",
         skip_serializing_if = "Option::is_none"
     )]
-    blend_mask_texture: Option<texture::Info>,
+    pub blend_mask_texture: Option<texture::Info>,
 }
 
 impl Validate for AsoboMaterialDetailMap {
@@ -255,7 +255,7 @@ impl Validate for AsoboMaterialDetailMap {
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct AsoboMaterialDrawOrder {
     #[serde(default, rename = "drawOrderOffset")]
-    draw_order_offset: f32,
+    pub draw_order_offset: f32,
 }
 
 impl Validate for AsoboMaterialDrawOrder {}
@@ -263,7 +263,7 @@ impl Validate for AsoboMaterialDrawOrder {}
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct AsoboMaterialFakeTerrain {
     #[serde(default = "bool_true")]
-    enabled: bool,
+    pub enabled: bool,
 }
 
 impl Validate for AsoboMaterialFakeTerrain {}
@@ -271,9 +271,9 @@ impl Validate for AsoboMaterialFakeTerrain {}
 #[derive(Clone, Default, Debug, Deserialize, Serialize)]
 pub struct AsoboMaterialFresnelFade {
     #[serde(default, rename = "fresnelFactor")]
-    fresnel_factor: f32,
+    pub fresnel_factor: f32,
     #[serde(default, rename = "fresnelOpacityOffset")]
-    fresnel_opacity_offset: f32,
+    pub fresnel_opacity_offset: f32,
 }
 
 impl Validate for AsoboMaterialFresnelFade {}
@@ -281,9 +281,9 @@ impl Validate for AsoboMaterialFresnelFade {}
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct AsoboMaterialGlass {
     #[serde(default, rename = "glassReflectionMaskFactor")]
-    glass_reflection_mask_factor: f32,
+    pub glass_reflection_mask_factor: f32,
     #[serde(default, rename = "glassDeformationFactor")]
-    glass_deformation_factor: f32,
+    pub glass_deformation_factor: f32,
 }
 
 impl Validate for AsoboMaterialGlass {}
@@ -291,7 +291,7 @@ impl Validate for AsoboMaterialGlass {}
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct AsoboMaterialInvisible {
     #[serde(default = "bool_true")]
-    enabled: bool,
+    pub enabled: bool,
 }
 
 impl Validate for AsoboMaterialInvisible {}
@@ -299,25 +299,25 @@ impl Validate for AsoboMaterialInvisible {}
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct AsoboMaterialParallaxWindow {
     #[serde(default, rename = "parallaxScale")]
-    parallax_scale: f32,
+    pub parallax_scale: f32,
     #[serde(default, rename = "roomSizeXScale")]
-    room_size_x_scale: f32,
+    pub room_size_x_scale: f32,
     #[serde(default, rename = "roomSizeYScale")]
-    room_size_y_scale: f32,
+    pub room_size_y_scale: f32,
     #[serde(default, rename = "roomNumberXY")]
-    room_number_xy: f32,
+    pub room_number_xy: f32,
     #[serde(
         default,
         rename = "heightMapTexture",
         skip_serializing_if = "Option::is_none"
     )]
-    height_map_texture: Option<texture::Info>,
+    pub height_map_texture: Option<texture::Info>,
     #[serde(
         default,
         rename = "behindWindowMapTexture",
         skip_serializing_if = "Option::is_none"
     )]
-    behind_window_map_texture: Option<texture::Info>,
+    pub behind_window_map_texture: Option<texture::Info>,
 }
 
 impl Validate for AsoboMaterialParallaxWindow {
@@ -334,7 +334,7 @@ impl Validate for AsoboMaterialParallaxWindow {
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct AsoboMaterialShadowOptions {
     #[serde(default = "bool_true", rename = "noCastShadow")]
-    no_cast_shadow: bool,
+    pub no_cast_shadow: bool,
 }
 
 impl Validate for AsoboMaterialShadowOptions {}
@@ -342,13 +342,13 @@ impl Validate for AsoboMaterialShadowOptions {}
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct AsoboMaterialSubsurface {
     #[serde(default, rename = "SSSColor")]
-    sss_color: [f32; 4],
+    pub sss_color: [f32; 4],
     #[serde(
         default,
         rename = "opacityTexture",
         skip_serializing_if = "Option::is_none"
     )]
-    opacity_texture: Option<texture::Info>,
+    pub opacity_texture: Option<texture::Info>,
 }
 
 impl Validate for AsoboMaterialSubsurface {
@@ -364,13 +364,13 @@ impl Validate for AsoboMaterialSubsurface {
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct AsoboMaterialUVOptions {
     #[serde(default = "bool_true", rename = "AOUseUV2")]
-    ao_use_uv2: bool,
+    pub ao_use_uv2: bool,
     #[serde(default = "bool_true", rename = "clampUVX")]
-    clamp_uvx: bool,
+    pub clamp_uvx: bool,
     #[serde(default = "bool_true", rename = "clampUVY")]
-    clamp_uvy: bool,
+    pub clamp_uvy: bool,
     #[serde(default = "bool_true", rename = "clampUVZ")]
-    clamp_uvz: bool,
+    pub clamp_uvz: bool,
 }
 
 impl Validate for AsoboMaterialUVOptions {}
@@ -378,7 +378,7 @@ impl Validate for AsoboMaterialUVOptions {}
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct AsoboTags {
     #[serde(default, rename = "Collision")]
-    collision: bool,
+    pub collision: bool,
 }
 
 impl Validate for AsoboTags {}
