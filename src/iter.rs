@@ -80,13 +80,13 @@ pub struct Images<'a> {
     pub(crate) document: &'a Document,
 }
 
-
 /// An `Iterator` that visits every light in a glTF asset.
 #[cfg(feature = "KHR_lights_punctual")]
 #[derive(Clone, Debug)]
 pub struct Lights<'a> {
     /// Internal image iterator.
-    pub(crate) iter: iter::Enumerate<slice::Iter<'a, json::extensions::scene::khr_lights_punctual::Light>>,
+    pub(crate) iter:
+        iter::Enumerate<slice::Iter<'a, json::extensions::scene::khr_lights_punctual::Light>>,
 
     /// The internal root glTF object.
     pub(crate) document: &'a Document,
@@ -166,7 +166,9 @@ impl<'a> ExactSizeIterator for Accessors<'a> {}
 impl<'a> Iterator for Accessors<'a> {
     type Item = Accessor<'a>;
     fn next(&mut self) -> Option<Self::Item> {
-        self.iter.next().map(|(index, json)| Accessor::new(self.document, index, json))
+        self.iter
+            .next()
+            .map(|(index, json)| Accessor::new(self.document, index, json))
     }
     fn size_hint(&self) -> (usize, Option<usize>) {
         self.iter.size_hint()
@@ -176,10 +178,14 @@ impl<'a> Iterator for Accessors<'a> {
     }
     fn last(self) -> Option<Self::Item> {
         let document = self.document;
-        self.iter.last().map(|(index, json)| Accessor::new(document, index, json))
+        self.iter
+            .last()
+            .map(|(index, json)| Accessor::new(document, index, json))
     }
     fn nth(&mut self, n: usize) -> Option<Self::Item> {
-        self.iter.nth(n).map(|(index, json)| Accessor::new(self.document, index, json))
+        self.iter
+            .nth(n)
+            .map(|(index, json)| Accessor::new(self.document, index, json))
     }
 }
 
@@ -187,7 +193,9 @@ impl<'a> ExactSizeIterator for Animations<'a> {}
 impl<'a> Iterator for Animations<'a> {
     type Item = Animation<'a>;
     fn next(&mut self) -> Option<Self::Item> {
-        self.iter.next().map(|(index, json)| Animation::new(self.document, index, json))
+        self.iter
+            .next()
+            .map(|(index, json)| Animation::new(self.document, index, json))
     }
     fn size_hint(&self) -> (usize, Option<usize>) {
         self.iter.size_hint()
@@ -197,10 +205,14 @@ impl<'a> Iterator for Animations<'a> {
     }
     fn last(self) -> Option<Self::Item> {
         let document = self.document;
-        self.iter.last().map(|(index, json)| Animation::new(document, index, json))
+        self.iter
+            .last()
+            .map(|(index, json)| Animation::new(document, index, json))
     }
     fn nth(&mut self, n: usize) -> Option<Self::Item> {
-        self.iter.nth(n).map(|(index, json)| Animation::new(self.document, index, json))
+        self.iter
+            .nth(n)
+            .map(|(index, json)| Animation::new(self.document, index, json))
     }
 }
 
@@ -208,7 +220,9 @@ impl<'a> ExactSizeIterator for Buffers<'a> {}
 impl<'a> Iterator for Buffers<'a> {
     type Item = Buffer<'a>;
     fn next(&mut self) -> Option<Self::Item> {
-        self.iter.next().map(|(index, json)| Buffer::new(self.document, index, json))
+        self.iter
+            .next()
+            .map(|(index, json)| Buffer::new(self.document, index, json))
     }
     fn size_hint(&self) -> (usize, Option<usize>) {
         self.iter.size_hint()
@@ -218,10 +232,14 @@ impl<'a> Iterator for Buffers<'a> {
     }
     fn last(self) -> Option<Self::Item> {
         let document = self.document;
-        self.iter.last().map(|(index, json)| Buffer::new(document, index, json))
+        self.iter
+            .last()
+            .map(|(index, json)| Buffer::new(document, index, json))
     }
     fn nth(&mut self, n: usize) -> Option<Self::Item> {
-        self.iter.nth(n).map(|(index, json)| Buffer::new(self.document, index, json))
+        self.iter
+            .nth(n)
+            .map(|(index, json)| Buffer::new(self.document, index, json))
     }
 }
 
@@ -269,7 +287,9 @@ impl<'a> ExactSizeIterator for Views<'a> {}
 impl<'a> Iterator for Views<'a> {
     type Item = View<'a>;
     fn next(&mut self) -> Option<Self::Item> {
-        self.iter.next().map(|(index, json)| View::new(self.document, index, json))
+        self.iter
+            .next()
+            .map(|(index, json)| View::new(self.document, index, json))
     }
     fn size_hint(&self) -> (usize, Option<usize>) {
         self.iter.size_hint()
@@ -279,10 +299,14 @@ impl<'a> Iterator for Views<'a> {
     }
     fn last(self) -> Option<Self::Item> {
         let document = self.document;
-        self.iter.last().map(|(index, json)| View::new(document, index, json))
+        self.iter
+            .last()
+            .map(|(index, json)| View::new(document, index, json))
     }
     fn nth(&mut self, n: usize) -> Option<Self::Item> {
-        self.iter.nth(n).map(|(index, json)| View::new(self.document, index, json))
+        self.iter
+            .nth(n)
+            .map(|(index, json)| View::new(self.document, index, json))
     }
 }
 
@@ -290,7 +314,9 @@ impl<'a> ExactSizeIterator for Cameras<'a> {}
 impl<'a> Iterator for Cameras<'a> {
     type Item = Camera<'a>;
     fn next(&mut self) -> Option<Self::Item> {
-        self.iter.next().map(|(index, json)| Camera::new(self.document, index, json))
+        self.iter
+            .next()
+            .map(|(index, json)| Camera::new(self.document, index, json))
     }
     fn size_hint(&self) -> (usize, Option<usize>) {
         self.iter.size_hint()
@@ -300,10 +326,14 @@ impl<'a> Iterator for Cameras<'a> {
     }
     fn last(self) -> Option<Self::Item> {
         let document = self.document;
-        self.iter.last().map(|(index, json)| Camera::new(document, index, json))
+        self.iter
+            .last()
+            .map(|(index, json)| Camera::new(document, index, json))
     }
     fn nth(&mut self, n: usize) -> Option<Self::Item> {
-        self.iter.nth(n).map(|(index, json)| Camera::new(self.document, index, json))
+        self.iter
+            .nth(n)
+            .map(|(index, json)| Camera::new(self.document, index, json))
     }
 }
 
@@ -311,7 +341,9 @@ impl<'a> ExactSizeIterator for Images<'a> {}
 impl<'a> Iterator for Images<'a> {
     type Item = Image<'a>;
     fn next(&mut self) -> Option<Self::Item> {
-        self.iter.next().map(|(index, json)| Image::new(self.document, index, json))
+        self.iter
+            .next()
+            .map(|(index, json)| Image::new(self.document, index, json))
     }
     fn size_hint(&self) -> (usize, Option<usize>) {
         self.iter.size_hint()
@@ -321,10 +353,14 @@ impl<'a> Iterator for Images<'a> {
     }
     fn last(self) -> Option<Self::Item> {
         let document = self.document;
-        self.iter.last().map(|(index, json)| Image::new(document, index, json))
+        self.iter
+            .last()
+            .map(|(index, json)| Image::new(document, index, json))
     }
     fn nth(&mut self, n: usize) -> Option<Self::Item> {
-        self.iter.nth(n).map(|(index, json)| Image::new(self.document, index, json))
+        self.iter
+            .nth(n)
+            .map(|(index, json)| Image::new(self.document, index, json))
     }
 }
 
@@ -347,10 +383,14 @@ impl<'a> Iterator for Lights<'a> {
     }
     fn last(self) -> Option<Self::Item> {
         let document = self.document;
-        self.iter.last().map(|(index, json)| crate::khr_lights_punctual::Light::new(document, index, json))
+        self.iter
+            .last()
+            .map(|(index, json)| crate::khr_lights_punctual::Light::new(document, index, json))
     }
     fn nth(&mut self, n: usize) -> Option<Self::Item> {
-        self.iter.nth(n).map(|(index, json)| crate::khr_lights_punctual::Light::new(self.document, index, json))
+        self.iter
+            .nth(n)
+            .map(|(index, json)| crate::khr_lights_punctual::Light::new(self.document, index, json))
     }
 }
 
@@ -358,7 +398,9 @@ impl<'a> ExactSizeIterator for Materials<'a> {}
 impl<'a> Iterator for Materials<'a> {
     type Item = Material<'a>;
     fn next(&mut self) -> Option<Self::Item> {
-        self.iter.next().map(|(index, json)| Material::new(self.document, index, json))
+        self.iter
+            .next()
+            .map(|(index, json)| Material::new(self.document, index, json))
     }
     fn size_hint(&self) -> (usize, Option<usize>) {
         self.iter.size_hint()
@@ -368,10 +410,14 @@ impl<'a> Iterator for Materials<'a> {
     }
     fn last(self) -> Option<Self::Item> {
         let document = self.document;
-        self.iter.last().map(|(index, json)| Material::new(document, index, json))
+        self.iter
+            .last()
+            .map(|(index, json)| Material::new(document, index, json))
     }
     fn nth(&mut self, n: usize) -> Option<Self::Item> {
-        self.iter.nth(n).map(|(index, json)| Material::new(self.document, index, json))
+        self.iter
+            .nth(n)
+            .map(|(index, json)| Material::new(self.document, index, json))
     }
 }
 
@@ -379,7 +425,9 @@ impl<'a> ExactSizeIterator for Meshes<'a> {}
 impl<'a> Iterator for Meshes<'a> {
     type Item = Mesh<'a>;
     fn next(&mut self) -> Option<Self::Item> {
-        self.iter.next().map(|(index, json)| Mesh::new(self.document, index, json))
+        self.iter
+            .next()
+            .map(|(index, json)| Mesh::new(self.document, index, json))
     }
     fn size_hint(&self) -> (usize, Option<usize>) {
         self.iter.size_hint()
@@ -389,10 +437,14 @@ impl<'a> Iterator for Meshes<'a> {
     }
     fn last(self) -> Option<Self::Item> {
         let document = self.document;
-        self.iter.last().map(|(index, json)| Mesh::new(document, index, json))
+        self.iter
+            .last()
+            .map(|(index, json)| Mesh::new(document, index, json))
     }
     fn nth(&mut self, n: usize) -> Option<Self::Item> {
-        self.iter.nth(n).map(|(index, json)| Mesh::new(self.document, index, json))
+        self.iter
+            .nth(n)
+            .map(|(index, json)| Mesh::new(self.document, index, json))
     }
 }
 
@@ -400,7 +452,9 @@ impl<'a> ExactSizeIterator for Nodes<'a> {}
 impl<'a> Iterator for Nodes<'a> {
     type Item = Node<'a>;
     fn next(&mut self) -> Option<Self::Item> {
-        self.iter.next().map(|(index, json)| Node::new(self.document, index, json))
+        self.iter
+            .next()
+            .map(|(index, json)| Node::new(self.document, index, json))
     }
     fn size_hint(&self) -> (usize, Option<usize>) {
         self.iter.size_hint()
@@ -410,10 +464,14 @@ impl<'a> Iterator for Nodes<'a> {
     }
     fn last(self) -> Option<Self::Item> {
         let document = self.document;
-        self.iter.last().map(|(index, json)| Node::new(document, index, json))
+        self.iter
+            .last()
+            .map(|(index, json)| Node::new(document, index, json))
     }
     fn nth(&mut self, n: usize) -> Option<Self::Item> {
-        self.iter.nth(n).map(|(index, json)| Node::new(self.document, index, json))
+        self.iter
+            .nth(n)
+            .map(|(index, json)| Node::new(self.document, index, json))
     }
 }
 
@@ -421,7 +479,9 @@ impl<'a> ExactSizeIterator for Samplers<'a> {}
 impl<'a> Iterator for Samplers<'a> {
     type Item = Sampler<'a>;
     fn next(&mut self) -> Option<Self::Item> {
-        self.iter.next().map(|(index, json)| Sampler::new(self.document, index, json))
+        self.iter
+            .next()
+            .map(|(index, json)| Sampler::new(self.document, index, json))
     }
     fn size_hint(&self) -> (usize, Option<usize>) {
         self.iter.size_hint()
@@ -431,10 +491,14 @@ impl<'a> Iterator for Samplers<'a> {
     }
     fn last(self) -> Option<Self::Item> {
         let document = self.document;
-        self.iter.last().map(|(index, json)| Sampler::new(document, index, json))
+        self.iter
+            .last()
+            .map(|(index, json)| Sampler::new(document, index, json))
     }
     fn nth(&mut self, n: usize) -> Option<Self::Item> {
-        self.iter.nth(n).map(|(index, json)| Sampler::new(self.document, index, json))
+        self.iter
+            .nth(n)
+            .map(|(index, json)| Sampler::new(self.document, index, json))
     }
 }
 
@@ -442,7 +506,9 @@ impl<'a> ExactSizeIterator for Scenes<'a> {}
 impl<'a> Iterator for Scenes<'a> {
     type Item = Scene<'a>;
     fn next(&mut self) -> Option<Self::Item> {
-        self.iter.next().map(|(index, json)| Scene::new(self.document, index, json))
+        self.iter
+            .next()
+            .map(|(index, json)| Scene::new(self.document, index, json))
     }
     fn size_hint(&self) -> (usize, Option<usize>) {
         self.iter.size_hint()
@@ -452,10 +518,14 @@ impl<'a> Iterator for Scenes<'a> {
     }
     fn last(self) -> Option<Self::Item> {
         let document = self.document;
-        self.iter.last().map(|(index, json)| Scene::new(document, index, json))
+        self.iter
+            .last()
+            .map(|(index, json)| Scene::new(document, index, json))
     }
     fn nth(&mut self, n: usize) -> Option<Self::Item> {
-        self.iter.nth(n).map(|(index, json)| Scene::new(self.document, index, json))
+        self.iter
+            .nth(n)
+            .map(|(index, json)| Scene::new(self.document, index, json))
     }
 }
 
@@ -463,7 +533,9 @@ impl<'a> ExactSizeIterator for Skins<'a> {}
 impl<'a> Iterator for Skins<'a> {
     type Item = Skin<'a>;
     fn next(&mut self) -> Option<Self::Item> {
-        self.iter.next().map(|(index, json)| Skin::new(self.document, index, json))
+        self.iter
+            .next()
+            .map(|(index, json)| Skin::new(self.document, index, json))
     }
     fn size_hint(&self) -> (usize, Option<usize>) {
         self.iter.size_hint()
@@ -473,10 +545,14 @@ impl<'a> Iterator for Skins<'a> {
     }
     fn last(self) -> Option<Self::Item> {
         let document = self.document;
-        self.iter.last().map(|(index, json)| Skin::new(document, index, json))
+        self.iter
+            .last()
+            .map(|(index, json)| Skin::new(document, index, json))
     }
     fn nth(&mut self, n: usize) -> Option<Self::Item> {
-        self.iter.nth(n).map(|(index, json)| Skin::new(self.document, index, json))
+        self.iter
+            .nth(n)
+            .map(|(index, json)| Skin::new(self.document, index, json))
     }
 }
 
@@ -484,7 +560,9 @@ impl<'a> ExactSizeIterator for Textures<'a> {}
 impl<'a> Iterator for Textures<'a> {
     type Item = Texture<'a>;
     fn next(&mut self) -> Option<Self::Item> {
-        self.iter.next().map(|(index, json)| Texture::new(self.document, index, json))
+        self.iter
+            .next()
+            .map(|(index, json)| Texture::new(self.document, index, json))
     }
     fn size_hint(&self) -> (usize, Option<usize>) {
         self.iter.size_hint()
@@ -494,9 +572,13 @@ impl<'a> Iterator for Textures<'a> {
     }
     fn last(self) -> Option<Self::Item> {
         let document = self.document;
-        self.iter.last().map(|(index, json)| Texture::new(document, index, json))
+        self.iter
+            .last()
+            .map(|(index, json)| Texture::new(document, index, json))
     }
     fn nth(&mut self, n: usize) -> Option<Self::Item> {
-        self.iter.nth(n).map(|(index, json)| Texture::new(self.document, index, json))
+        self.iter
+            .nth(n)
+            .map(|(index, json)| Texture::new(self.document, index, json))
     }
 }

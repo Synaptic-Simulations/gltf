@@ -1,5 +1,5 @@
 use gltf_derive::Validate;
-use serde_derive::{Serialize, Deserialize};
+use serde_derive::{Deserialize, Serialize};
 
 /// A set of primitives to be rendered.
 ///

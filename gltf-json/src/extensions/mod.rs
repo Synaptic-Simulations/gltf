@@ -50,6 +50,7 @@ pub const ENABLED_EXTENSIONS: &'static [&'static str] = &[
     "KHR_materials_transmission",
     #[cfg(feature = "KHR_materials_ior")]
     "KHR_materials_ior",
+    "ASOBO_normal_map_convention",
 ];
 
 /// Names of glTF 2.0 extensions supported by the library.
@@ -60,4 +61,5 @@ pub const SUPPORTED_EXTENSIONS: &'static [&'static str] = &[
     "KHR_texture_transform",
     "KHR_materials_transmission",
     "KHR_materials_ior",
+    "ASOBO_normal_map_convention",
 ];
